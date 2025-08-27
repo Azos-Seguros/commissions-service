@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "commissions-service"
+version = "0.0.0"
+description = "Commissions Service"
+authors = ["Azos-Seguros"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.116.1"
+uvicorn = "^0.34.0"
+python-dotenv = "^1.0.1"
+alembic = "^1.16.4"
+sqlalchemy = "^2.0.43"
+pydantic = "^2.11.7"
+pydantic-settings = "^2.10.1"
+asyncpg = "^0.30.0"
+motor = "^3.6.0"
+pymongo = "^4.8.0"
+bson = "^0.5.10"
+sqlmodel = "^0.0.24"
+greenlet = "^3.2.4"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+isort = "^6.0.1"
+flake8 = "^7.3.0"
+pylint = "^3.3.8"
+mypy = "^1.15.0"
+
+[tool.isort]
+profile = "black"
+line_length = "150"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+plugins = ["sqlalchemy.ext.mypy.plugin"]
+ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

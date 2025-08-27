@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: commissions_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: commissions_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init:/docker-entrypoint-initdb.d
+    networks:
+      - commissions_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  commissions_network:
+    driver: bridge
