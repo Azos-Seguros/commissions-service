@@ -14,7 +14,7 @@ def create_dmn_use_case(session: AsyncSession = Depends(get_session)):
     return CreateDMNUseCase(repository=DMNRepository(session=session))
 
 
-@dmn_routes.post("/", status_code=200, response_model=None)
+@dmn_routes.post("", status_code=200, response_model=None)
 async def create_dmn(
     data: CreateDMNDTO, use_case: CreateDMNUseCase = Depends(create_dmn_use_case)
 ) -> dict:

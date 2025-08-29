@@ -1,4 +1,5 @@
 from typing import Type, Optional, List
+from sqlalchemy import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.shared.domain.interfaces.base_repository import IBaseRepository, T
 
@@ -16,7 +17,7 @@ class PostgresRepository(IBaseRepository[T]):
         return result.scalars().all()
 
     async def save(self, entity: T) -> None:
-        self.session.add(entity)
+        await self.session.execute(insert(self.entity_class), entity.__dict__)
         await self.session.commit()
 
     async def delete(self, entity_id: str) -> None:
