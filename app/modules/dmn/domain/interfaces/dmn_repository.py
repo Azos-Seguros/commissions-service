@@ -3,4 +3,6 @@ from app.shared.domain.interfaces.base_repository import IBaseRepository
 
 
 class IDMNRepository(IBaseRepository[DMN]):
+    """Interface para repositório de DMN."""
+
     pass

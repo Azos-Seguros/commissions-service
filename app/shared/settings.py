@@ -27,9 +27,12 @@ class Settings(BaseSettings):
     root_path: str = Field(default="")
 
     # Database settings
-    db_uri: str = Field(
+    postgres_uri: str = Field(
         default="postgresql+asyncpg://postgres:postgres@localhost:5432/commissions_db"
     )
+
+    # MongoDB settings
+    mongodb_uri: str = Field(default="mongodb://localhost:27017/commissions_db")
 
     class Config:
         env_file = ".env"

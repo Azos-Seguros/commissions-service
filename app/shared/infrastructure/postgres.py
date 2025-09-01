@@ -20,7 +20,7 @@ class Database(metaclass=ABCSingleton):
 
     Base = declarative_base()
 
-    def __init__(self, db_uri: str = settings.db_uri) -> None:
+    def __init__(self, db_uri: str = settings.postgres_uri) -> None:
         if self._engine is None:
             self._engine = create_async_engine(
                 db_uri,

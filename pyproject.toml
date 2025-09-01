@@ -15,10 +15,9 @@ pydantic = "^2.11.7"
 pydantic-settings = "^2.10.1"
 asyncpg = "^0.30.0"
 motor = "^3.6.0"
-pymongo = "^4.8.0"
-bson = "^0.5.10"
 sqlmodel = "^0.0.24"
 greenlet = "^3.2.4"
+pymongo = "^4.14.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"
