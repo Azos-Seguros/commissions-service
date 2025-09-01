@@ -17,7 +17,7 @@ class MongoRepository(IBaseRepository[T]):
         return [self.entity_class(**doc) async for doc in cursor]
 
     async def save(self, entity: T) -> ObjectId:
-        result = await self.collection.insert_one(entity.model_dump(by_alias=True))
+        result = await self.collection.insert_one(entity.__dict__)
         return result.inserted_id
 
     async def update(self, entity: T) -> T:

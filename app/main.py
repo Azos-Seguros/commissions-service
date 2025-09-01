@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.shared.settings import settings
 from app.shared.adapters.api import core_routes
 from app.modules.dmn.adapters.api import dmn_routes
+from app.modules.commissions.adapters.api import commission_routes
 
 app = FastAPI(
     title="Commissions Service",
@@ -23,3 +24,4 @@ app.add_middleware(
 
 app.include_router(core_routes)
 app.include_router(dmn_routes)
+app.include_router(commission_routes)

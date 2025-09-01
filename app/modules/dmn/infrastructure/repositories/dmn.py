@@ -1,5 +1,5 @@
 from app.modules.dmn.domain.entities.dmn import DMN
-from app.modules.dmn.domain.interfaces.dmn_repository import IDMNRepository
+from app.modules.dmn.domain.interfaces import IDMNRepository
 from app.shared.infrastructure.repositories import MongoRepository
 
 
