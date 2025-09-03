@@ -56,7 +56,7 @@ async def run_async_migrations():
     """In this scenario we need to create an Engine
     and associate a connection with the context.
     """
-    config.set_main_option("sqlalchemy.url", settings.db_uri)
+    config.set_main_option("sqlalchemy.url", settings.postgres_uri)
     connectable = AsyncEngine(
         engine_from_config(
             config.get_section(config.config_ini_section, {}),

@@ -11,7 +11,7 @@ class DMN(BaseModel):
     model_config = {"arbitrary_types_allowed": True}
 
     id: ObjectId = Field(default_factory=ObjectId, alias="_id")
-    account_id: str = Field(..., description="ID da conta")
+    broker_id: str = Field(..., description="ID do broker")
     commission_percentage: float = Field(..., description="Porcentagem de comissão")
     take_rate_percentage: Optional[float] = Field(
         ..., description="Porcentagem de take rate"
@@ -27,8 +27,7 @@ class DMN(BaseModel):
     @staticmethod
     def create(data: CreateDMNDTO) -> "DMN":
         return DMN(
-            id=ObjectId(),
-            account_id=data.account_id,
+            broker_id=data.broker_id,
             commission_percentage=data.commission_percentage,
             take_rate_percentage=data.take_rate_percentage,
             recurrence_type=data.recurrence_type,
