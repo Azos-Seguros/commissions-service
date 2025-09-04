@@ -5,7 +5,7 @@ Configuração do MongoDB usando motor (async driver).
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 
 from app.shared.settings import settings
-from app.shared.utils.singleton import ABCSingleton
+from app.shared.utils import ABCSingleton
 
 
 class MongoDB(metaclass=ABCSingleton):

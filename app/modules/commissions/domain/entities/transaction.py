@@ -24,23 +24,30 @@ class Transaction(BaseModel):
 
     @staticmethod
     def create(
-        data: CreateTransactionDTO, external_transaction_id: str
+        data: CreateTransactionDTO,
     ) -> "Transaction":
         return Transaction(
-            id=uuid4(),
             status=data.status,
+            policy_id=data.policy_id,
             invoice_id=data.invoice_id,
+            proposal_id=data.proposal_id,
             gross_amount=data.gross_amount,
+            raw_transaction_id=data.raw_transaction_id,
             transaction_type=data.transaction_type,
-            external_transaction_id=external_transaction_id,
+            external_invoice_id=data.external_invoice_id,
+            external_receivable_id=data.external_receivable_id,
         )
 
     def to_model(self) -> "TransactionModel":
         return TransactionModel(
             id=self.id,
             status=self.status,
+            policy_id=self.policy_id,
             invoice_id=self.invoice_id,
+            proposal_id=self.proposal_id,
             gross_amount=self.gross_amount,
             transaction_type=self.transaction_type,
-            external_transaction_id=self.external_transaction_id,
+            raw_transaction_id=self.raw_transaction_id,
+            external_invoice_id=self.external_invoice_id,
+            external_receivable_id=self.external_receivable_id,
         )

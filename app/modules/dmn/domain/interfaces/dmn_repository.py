@@ -1,8 +1,10 @@
-from app.modules.dmn.domain.entities.dmn import DMN
-from app.shared.domain.interfaces.base_repository import IBaseRepository
+from typing import Optional
+from app.modules.dmn.domain.entities import DMN
+from app.shared.domain.interfaces import IBaseRepository
 
 
 class IDMNRepository(IBaseRepository[DMN]):
     """Interface para repositório de DMN."""
 
-    pass
+    async def get_by_broker_id(self, broker_id: str) -> Optional[DMN]:
+        pass

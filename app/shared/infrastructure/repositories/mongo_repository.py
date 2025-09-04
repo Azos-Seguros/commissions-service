@@ -1,6 +1,7 @@
 from typing import Type, Optional, List
 from bson import ObjectId
 from app.shared.domain.interfaces.base_repository import IBaseRepository, T
+from app.shared.utils import to_dict
 
 
 class MongoRepository(IBaseRepository[T]):
@@ -17,12 +18,12 @@ class MongoRepository(IBaseRepository[T]):
         return [self.entity_class(**doc) async for doc in cursor]
 
     async def save(self, entity: T) -> ObjectId:
-        result = await self.collection.insert_one(entity.__dict__)
+        result = await self.collection.insert_one(to_dict(entity))
         return result.inserted_id
 
     async def update(self, entity: T) -> T:
         await self.collection.update_one(
-            {"_id": ObjectId(entity.id)}, {"$set": entity.__dict__}
+            {"_id": ObjectId(entity.id)}, {"$set": to_dict(entity)}
         )
         return entity
 

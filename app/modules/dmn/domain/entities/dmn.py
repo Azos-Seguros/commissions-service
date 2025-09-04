@@ -3,7 +3,7 @@ from typing import Optional
 from bson import ObjectId
 from pydantic import BaseModel, Field
 
-from app.modules.dmn.adapters.dtos import CreateDMNDTO
+from app.modules.dmn.adapters.dtos import CreateDMNDTO, GetDMNResponseDTO
 from app.modules.dmn.domain.enums import RecurrenceType
 
 
@@ -33,4 +33,12 @@ class DMN(BaseModel):
             recurrence_type=data.recurrence_type,
             created_at=datetime.datetime.now(),
             updated_at=datetime.datetime.now(),
+        )
+
+    def to_dto(self) -> GetDMNResponseDTO:
+        return GetDMNResponseDTO(
+            broker_id=self.broker_id,
+            recurrence_type=self.recurrence_type,
+            commission_percentage=self.commission_percentage,
+            take_rate_percentage=self.take_rate_percentage,
         )

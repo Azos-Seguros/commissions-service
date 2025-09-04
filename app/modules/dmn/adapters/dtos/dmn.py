@@ -10,3 +10,8 @@ class CreateDMNDTO:
     commission_percentage: float
     recurrence_type: RecurrenceType
     take_rate_percentage: Optional[float] = None
+
+
+@dataclass
+class GetDMNResponseDTO(CreateDMNDTO):
+    pass

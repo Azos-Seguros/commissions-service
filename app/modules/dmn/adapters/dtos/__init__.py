@@ -1,3 +1,4 @@
 from .dmn import CreateDMNDTO
+from .dmn import GetDMNResponseDTO
 
-__all__ = ["CreateDMNDTO"]
+__all__ = ["CreateDMNDTO", "GetDMNResponseDTO"]

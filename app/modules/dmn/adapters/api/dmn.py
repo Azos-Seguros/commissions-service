@@ -1,6 +1,7 @@
+from typing import Optional
 from fastapi import APIRouter, Depends
-from app.modules.dmn.adapters.dtos.dmn import CreateDMNDTO
-from app.modules.dmn.application.use_cases import CreateDMNUseCase
+from app.modules.dmn.adapters.dtos import CreateDMNDTO, GetDMNResponseDTO
+from app.modules.dmn.application.use_cases import CreateDMNUseCase, GetDMNUseCase
 from app.modules.dmn.infrastructure.repositories import DMNRepository
 from app.shared.infrastructure.mongodb import get_collection
 
@@ -18,3 +19,11 @@ async def create_dmn(
     data: CreateDMNDTO, use_case: CreateDMNUseCase = Depends(create_dmn_use_case)
 ) -> None:
     await use_case.execute(data)
+
+
+async def get_dmn(
+    broker_id: str,
+) -> Optional[GetDMNResponseDTO]:
+    collection = await get_collection("dmn_rules")
+    use_case = GetDMNUseCase(repository=DMNRepository(collection))
+    return await use_case.execute(broker_id)

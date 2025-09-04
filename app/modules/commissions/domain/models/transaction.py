@@ -18,7 +18,7 @@ class TransactionModel(db.Base):
     )  # id da recebível no azos.dis
     external_invoice_id = Column(String, nullable=False)  # id da fatura no azos.dis
     gross_amount = Column(Numeric(15, 3), nullable=False)
-    net_amount = Column(Numeric(15, 3), nullable=False)
+    net_amount = Column(Numeric(15, 3), nullable=True)
     iss = Column(Numeric(15, 3), nullable=True)
     status = Column(String, nullable=False)
     transaction_type = Column(String, nullable=False)

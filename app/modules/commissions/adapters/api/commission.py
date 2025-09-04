@@ -1,5 +1,5 @@
+from typing import Any, Dict
 from fastapi import APIRouter, Depends
-from app.modules.commissions.adapters.dtos import CreateTransactionDTO
 from app.modules.commissions.application.use_cases import (
     CreateCommissionUseCase,
 )
@@ -27,7 +27,7 @@ async def create_transaction_use_case(session: AsyncSession = Depends(get_sessio
 
 @commission_routes.post("", status_code=200, response_model=None)
 async def create_transaction(
-    data: CreateTransactionDTO,
+    data: Dict[str, Any],
     use_case: CreateCommissionUseCase = Depends(create_transaction_use_case),
 ) -> None:
     await use_case.execute(data)

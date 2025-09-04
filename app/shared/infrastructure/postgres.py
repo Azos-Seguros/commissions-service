@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import (
 from sqlalchemy.orm import declarative_base
 
 from app.shared.settings import settings
-from app.shared.utils.singleton import ABCSingleton
+from app.shared.utils import ABCSingleton
 
 
 class Database(metaclass=ABCSingleton):

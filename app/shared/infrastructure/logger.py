@@ -2,7 +2,7 @@ import logging
 import sys
 from typing import Any, Dict, Optional
 
-from app.shared.domain.interfaces.logger import ILogger
+from app.shared.domain.interfaces import ILogger
 
 
 class Logger(ILogger):
