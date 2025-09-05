@@ -8,7 +8,7 @@ class IBaseRepository(ABC, Generic[T]):
     """Interface base para repositórios seguindo os princípios da Clean Architecture."""
 
     @abstractmethod
-    async def save(self, entity: T) -> T:
+    async def save(self, entity: T) -> str:
         """
         Salva uma entidade no repositório.
 

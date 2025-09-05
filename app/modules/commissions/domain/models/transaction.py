@@ -1,7 +1,6 @@
-from datetime import datetime
 from uuid import uuid4
-
 from sqlalchemy import Column, DateTime, Numeric, String, ForeignKey
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
 from app.shared.infrastructure.postgres import db
@@ -10,7 +9,7 @@ from app.shared.infrastructure.postgres import db
 class TransactionModel(db.Base):
     __tablename__ = "transactions"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid4()))
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     policy_id = Column(String, nullable=False)
     proposal_id = Column(String, nullable=False)
     external_receivable_id = Column(
@@ -23,10 +22,8 @@ class TransactionModel(db.Base):
     status = Column(String, nullable=False)
     transaction_type = Column(String, nullable=False)
     raw_transaction_id = Column(String, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = Column(
-        DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow
-    )
+    created_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime, nullable=False)
 
     invoice_id = Column(String, ForeignKey("invoices.id"), nullable=False)
     invoice = relationship("InvoiceModel", back_populates="transactions")

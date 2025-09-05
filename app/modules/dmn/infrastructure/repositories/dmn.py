@@ -9,5 +9,5 @@ class DMNRepository(IDMNRepository, MongoRepository):
         super().__init__(collection, DMN)
 
     async def get_by_broker_id(self, broker_id: str) -> Optional[DMN]:
-        data = await self.collection.find_one({"broker_id": broker_id})
-        return DMN(**data) if data else None
+        result = await self.collection.find_one({"broker_id": broker_id})
+        return DMN(**result) if result else None

@@ -9,7 +9,7 @@ from app.modules.commissions.domain.models import TransactionModel
 class Transaction(BaseModel):
     model_config = {"arbitrary_types_allowed": True}
 
-    id: str = Field(default_factory=uuid4)
+    id: str = Field(default=lambda: str(uuid4()))
     invoice_id: str = Field(..., description="ID da invoice")
     gross_amount: float = Field(..., description="Valor bruto")
     status: str = Field(..., description="Status")

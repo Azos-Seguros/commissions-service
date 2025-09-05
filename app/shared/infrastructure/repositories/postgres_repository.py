@@ -16,11 +16,11 @@ class PostgresRepository(IBaseRepository[T]):
         result = await self.session.execute(select(self.entity_class))
         return result.scalars().all()
 
-    async def save(self, entity: T) -> T:
+    async def save(self, entity: T) -> str:
         self.session.add(entity)
         await self.session.commit()
         await self.session.refresh(entity)
-        return entity
+        return entity.id
 
     async def update(self, entity: T) -> T:
         await self.session.merge(entity)

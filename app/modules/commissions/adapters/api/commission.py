@@ -1,10 +1,14 @@
 from typing import Any, Dict
 from fastapi import APIRouter, Depends
+from app.modules.commissions.application.strategies import (
+    PeriodStrategy,
+)
 from app.modules.commissions.application.use_cases import (
     CreateCommissionUseCase,
 )
 from app.modules.commissions.infrastructure.repositories import (
     TransactionRepository,
+    InvoiceRepository,
 )
 from app.shared.infrastructure.postgres import get_session
 
@@ -20,8 +24,10 @@ commission_routes = APIRouter(prefix="/commission", tags=["commission"])
 async def create_transaction_use_case(session: AsyncSession = Depends(get_session)):
     raw_collection = await get_collection("raw_transactions")
     return CreateCommissionUseCase(
-        transaction_repository=TransactionRepository(session=session),
+        period_strategy=PeriodStrategy(),
+        invoice_repository=InvoiceRepository(session=session),
         raw_repository=RawRepository(collection=raw_collection),
+        transaction_repository=TransactionRepository(session=session),
     )
 
 

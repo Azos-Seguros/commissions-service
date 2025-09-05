@@ -10,16 +10,16 @@ class MongoRepository(IBaseRepository[T]):
         self.entity_class = entity_class
 
     async def get_by_id(self, entity_id: str) -> Optional[T]:
-        data = await self.collection.find_one({"_id": ObjectId(entity_id)})
-        return self.entity_class(**data) if data else None
+        result = await self.collection.find_one({"_id": ObjectId(entity_id)})
+        return self.entity_class(**result) if result else None
 
     async def get_all(self) -> List[T]:
         cursor = self.collection.find()
         return [self.entity_class(**doc) async for doc in cursor]
 
-    async def save(self, entity: T) -> ObjectId:
+    async def save(self, entity: T) -> str:
         result = await self.collection.insert_one(to_dict(entity))
-        return result.inserted_id
+        return str(result.inserted_id)
 
     async def update(self, entity: T) -> T:
         await self.collection.update_one(

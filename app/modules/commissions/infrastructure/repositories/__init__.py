@@ -1,3 +1,4 @@
 from .transaction import TransactionRepository
+from .invoice import InvoiceRepository
 
-__all__ = ["TransactionRepository"]
+__all__ = ["TransactionRepository", "InvoiceRepository"]
